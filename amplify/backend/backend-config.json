@@ -1,0 +1,43 @@
+{
+  "api": {
+    "paymentsqs": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "Payment"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "Payment": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_Payment_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "Payment"
+        }
+      ]
+    },
+    "AMPLIFY_function_Payment_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "Payment"
+        }
+      ]
+    }
+  }
+}
