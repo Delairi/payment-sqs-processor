@@ -1,6 +1,10 @@
+import CreditCard from "./components/CreditCard"
+
 function App() {
   return (
-    <div>Payment sqs processor</div>
+    <div>
+      <CreditCard />
+    </div>
   )
 }
 
