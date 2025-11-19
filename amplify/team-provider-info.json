@@ -13,20 +13,16 @@
     },
     "categories": {
       "function": {
-        "Payment": {
-          "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",
-          "s3Key": "amplify-builds/Payment-6e363868376b55655445-build.zip"
-        },
         "ProcessPayment": {
           "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",
-          "s3Key": "amplify-builds/ProcessPayment-4a4575577163516f3079-build.zip"
+          "s3Key": "amplify-builds/ProcessPayment-47613936726235412f55-build.zip"
         }
-      },
-      "api": {
-        "paymentsqs": {}
       },
       "storage": {
         "PaymentDB": {}
+      },
+      "api": {
+        "PaymentAPI": {}
       }
     }
   }

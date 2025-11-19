@@ -1,9 +1,9 @@
 {
   "version": 1,
   "paths": {
-    "/payment": {
-      "name": "/payment",
-      "lambdaFunction": "Payment",
+    "/orders": {
+      "name": "/orders",
+      "lambdaFunction": "ProcessPayment",
       "permissions": {
         "setting": "open"
       }
