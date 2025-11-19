@@ -60,5 +60,11 @@
         }
       ]
     }
+  },
+  "storage": {
+    "PaymentDB": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
   }
 }
