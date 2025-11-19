@@ -15,7 +15,11 @@
       "function": {
         "Payment": {
           "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",
-          "s3Key": "amplify-builds/Payment-423243595a452b4b4c57-build.zip"
+          "s3Key": "amplify-builds/Payment-6e363868376b55655445-build.zip"
+        },
+        "ProcessPayment": {
+          "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",
+          "s3Key": "amplify-builds/ProcessPayment-32654658384433426431-build.zip"
         }
       },
       "api": {

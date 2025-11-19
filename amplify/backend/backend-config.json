@@ -20,6 +20,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "ProcessPayment": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -36,6 +41,22 @@
         {
           "category": "function",
           "resourceName": "Payment"
+        }
+      ]
+    },
+    "AMPLIFY_function_ProcessPayment_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ProcessPayment"
+        }
+      ]
+    },
+    "AMPLIFY_function_ProcessPayment_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ProcessPayment"
         }
       ]
     }
