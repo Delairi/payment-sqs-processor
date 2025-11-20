@@ -12,7 +12,7 @@ exports.handler = async (event) => {
 
         for (const record of event.Records) {
             const body = JSON.parse(record.body);
-            if(!body.card || !body.name) throw new Error("Invalid body format");
+            if (!body.card || !body.name) throw new Error("Invalid body format");
             const command = new PutItemCommand({
                 TableName: "Orders-dev",
                 Item: {
@@ -23,7 +23,9 @@ exports.handler = async (event) => {
                 }
             });
             const response = await client.send(command);
-            return { response };
+            return {
+                response
+            };
         }
     } catch (err) {
         console.log("Error processing SQS message:", err);

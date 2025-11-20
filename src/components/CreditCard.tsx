@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { formatCardNumber, formatExpiry } from "../utils/format";
 import IChip from "../assets/chip.png"
-const CreditCard: React.FC = () => {
+
+interface CreditCardProps {
+    createOrder: (e:FormEvent<HTMLFormElement>) => void;
+}
+const CreditCard = ({ createOrder }: CreditCardProps) => {
     const [number, setNumber] = useState("");
     const [name, setName] = useState("");
     const [expiry, setExpiry] = useState("");
@@ -58,11 +62,14 @@ const CreditCard: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-md p-6">
+                <form
+                onSubmit={createOrder}
+                className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-md p-6">
                     <h3 className="text-lg font-semibold mb-4">Credit card</h3>
 
                     <label className="block text-sm text-gray-600">Card number</label>
                     <input
+                        name="card"
                         inputMode="numeric"
                         value={formatCardNumber(number)}
                         onChange={(e) => {
@@ -77,6 +84,7 @@ const CreditCard: React.FC = () => {
                         <div>
                             <label className="block text-sm text-gray-600">Name</label>
                             <input
+                                name="name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value.toUpperCase())}
                                 className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none"
@@ -87,6 +95,7 @@ const CreditCard: React.FC = () => {
                         <div>
                             <label className="block text-sm text-gray-600">Expiry (MM/YY)</label>
                             <input
+                                name="expiry"
                                 inputMode="numeric"
                                 value={expiry}
                                 onChange={(e) => setExpiry(formatExpiry(e.target.value))}
@@ -100,6 +109,7 @@ const CreditCard: React.FC = () => {
                     <div className="mt-3">
                         <label className="block text-sm text-gray-600">CVC</label>
                         <input
+                            name="cvv"
                             inputMode="numeric"
                             value={cvc}
                             onFocus={() => setIsFlipped(true)}
@@ -112,13 +122,13 @@ const CreditCard: React.FC = () => {
 
                     <div className="w-full mt-6 flex justify-center items-center">
                         <button
-                            type="button"
+                            type="submit"
                             className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition w-full"
                         >
                             Pay Now
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );

@@ -1,10 +1,8 @@
-import CreditCard from "./components/CreditCard"
+import Home from "./pages/Home"
 
 function App() {
   return (
-    <div>
-      <CreditCard />
-    </div>
+    <Home />
   )
 }
 
