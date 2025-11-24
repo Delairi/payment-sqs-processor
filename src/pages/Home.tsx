@@ -1,9 +1,12 @@
-import type { FormEvent } from "react";
+import { useEffect, type FormEvent } from "react";
 import CreditCard from "../components/CreditCard"
-import { CreateOrderService } from "../services/Order.service"
+import { CreateOrderService, GetOrdersService } from "../services/Order.service"
 
 const Home = () => {
-
+    
+    useEffect(() => {
+      GetOrdersService()
+    }, [])
     const createOrder = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(e)

@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "ProcessPayment"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "GetOrders"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -16,6 +24,11 @@
     }
   },
   "function": {
+    "GetOrders": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "ProcessPayment": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -23,6 +36,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_GetOrders_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetOrders"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetOrders_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetOrders"
+        }
+      ]
+    },
     "AMPLIFY_function_ProcessPayment_deploymentBucketName": {
       "usedBy": [
         {
