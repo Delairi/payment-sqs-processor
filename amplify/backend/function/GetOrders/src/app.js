@@ -25,7 +25,7 @@ app.get('/orders', async function (req, res) {
     };
 
     const data = await client.send(new ScanCommand(params));
-    res.json(data);
+    res.json(data.Items);
   } catch (err) {
     console.error("Error", err);
     res.status(500).json({ error: 'Could not retrieve orders' });

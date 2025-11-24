@@ -1,4 +1,5 @@
 import { get, post } from "aws-amplify/api"
+import type { OrderProps } from "../interfaces/Order.interface";
 
 export async function CreateOrderService(name: string, card: string) {
     try {
@@ -39,7 +40,7 @@ export async function GetOrdersService() {
         });
 
         const { body } = await create.response;
-        const response = await body.json();
+        const response = await body.json() as unknown as OrderProps[];
         return response;
     } catch (error) {
         console.log('Get orders failed: ', error);

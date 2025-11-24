@@ -1,12 +1,8 @@
-import { useEffect, type FormEvent } from "react";
+import { type FormEvent } from "react";
 import CreditCard from "../components/CreditCard"
-import { CreateOrderService, GetOrdersService } from "../services/Order.service"
+import { CreateOrderService } from "../services/Order.service"
 
 const Home = () => {
-    
-    useEffect(() => {
-      GetOrdersService()
-    }, [])
     const createOrder = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(e)
@@ -18,7 +14,7 @@ const Home = () => {
         console.log(response)
     }
     return (
-        <div className="w-full h-screen flex items-center justify-center">
+        <div className="w-full h-full content-center">
             <CreditCard createOrder={(e) => createOrder(e)} />
         </div>
     )

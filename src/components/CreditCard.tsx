@@ -15,7 +15,7 @@ const CreditCard = ({ createOrder }: CreditCardProps) => {
     const plainNumber = number.replace(/\s/g, "");
 
     return (
-        <div className="max-w-4xl mx-auto p-6 font-montserrat">
+        <div className="w-auto p-6 font-montserrat flex items-center justify-center">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
 
                 <div>
