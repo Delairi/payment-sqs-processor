@@ -1,25 +1,21 @@
-import { get, post } from "aws-amplify/api"
+import { get } from "aws-amplify/api"
 import type { OrderProps } from "../interfaces/Order.interface";
+import { URL_PROCESS_PAYMENT } from "../constants";
 
 export async function CreateOrderService(name: string, card: string) {
     try {
-        const create = post({
-            apiName: 'PaymentAPI',
-            path: '/payment',
-            options: {
-                body: {
-                    name,
-                    card
-                },
-                headers: {
-                    "Content-Type": "application/json",
-                },
+        const create = await fetch(`${URL_PROCESS_PAYMENT}/payment`, {
+            method: "POST",
+            body: JSON.stringify({
+                name,
+                card
+            }),
+            headers: {
+                "Content-Type": "application/json",
             },
+        })
 
-        });
-
-        const { body } = await create.response;
-        const response = await body.json();
+        const response = await create.json();
         return response;
     } catch (error) {
         console.log('Order create failed: ', error);

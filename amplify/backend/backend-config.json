@@ -8,19 +8,17 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "ProcessPayment"
-        },
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
           "resourceName": "GetOrders"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    }
+  },
+  "custom": {
+    "CustomProcesPayment": {
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
     }
   },
   "function": {

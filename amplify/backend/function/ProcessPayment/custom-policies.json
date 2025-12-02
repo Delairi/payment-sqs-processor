@@ -1,6 +1,13 @@
 [
   {
-    "Action": [],
-    "Resource": []
+    "Action": [
+      "sqs:DeleteMessage",
+      "sqs:ReceiveMessage",
+      "sqs:SendMessage",
+      "sqs:GetQueueAttributes"
+    ],
+    "Resource": [
+      "arn:aws:sqs:us-east-2:327820291301:ProcessPaymentQueue"
+    ]
   }
 ]

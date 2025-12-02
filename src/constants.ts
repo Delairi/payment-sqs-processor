@@ -1,0 +1,1 @@
+export const URL_PROCESS_PAYMENT=import.meta.env.VITE_URL_PROCESS_PAYMENT
