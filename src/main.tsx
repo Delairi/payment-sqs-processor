@@ -6,8 +6,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home.tsx';
 import Orders from './pages/Orders.tsx';
 import MainLayout from './layouts/MainLayout.tsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 Amplify.configure(awsExports);
 
+const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,5 +28,7 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router} />
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+  </QueryClientProvider>
 )

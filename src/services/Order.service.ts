@@ -32,7 +32,6 @@ export async function GetOrdersService() {
                     "Content-Type": "application/json",
                 },
             },
-
         });
 
         const { body } = await create.response;

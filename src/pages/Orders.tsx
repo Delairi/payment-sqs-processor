@@ -1,15 +1,14 @@
 import { useEffect } from "react"
-import { GetOrdersService } from "../services/Order.service"
 import useStore from "../store"
+import { useOrders } from "../hooks/Orders.hook"
 
 const Orders = () => {
-  const { orders, setOrders } = useStore()
+  const { setOrders } = useStore()
+  const { data: orders, isLoading } = useOrders();
+
   useEffect(() => {
-    if (orders) return
-    GetOrdersService().then(res => {
-      if (!res) return
-      setOrders(res)
-    })
+    if (!orders || isLoading) return;
+    setOrders(orders)    
   }, [])
   return (
     <div className="flex flex-col gap-5">
