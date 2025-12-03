@@ -15,7 +15,7 @@
       "function": {
         "ProcessPayment": {
           "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",
-          "s3Key": "amplify-builds/ProcessPayment-5548584337765a4e7336-build.zip"
+          "s3Key": "amplify-builds/ProcessPayment-7055523778732b555459-build.zip"
         },
         "GetOrders": {
           "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",
@@ -23,7 +23,7 @@
         },
         "ChangeStatus": {
           "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",
-          "s3Key": "amplify-builds/ChangeStatus-4d34763156777336414d-build.zip"
+          "s3Key": "amplify-builds/ChangeStatus-34476f71443155525563-build.zip"
         }
       },
       "storage": {

@@ -20,11 +20,12 @@ export class cdkStack extends cdk.Stack {
     });
 
     const getProjectInfo = AmplifyHelpers.getProjectInfo()
-    const tableName = `Orders-${getProjectInfo.envName}`;
+    const tableOrders = `Orders-${getProjectInfo.envName}`;
+    const tableStatus = `Status-${getProjectInfo.envName}`;
 
     const myQueue = new sqs.Queue(this, 'ProcessPaymentQueue', {
       queueName: 'ProcessPaymentQueue',
-      encryption:  sqs.QueueEncryption.UNENCRYPTED
+      encryption: sqs.QueueEncryption.UNENCRYPTED
     });
 
     const processPaymentLambda = new lambda.Function(this, 'ProcessPaymentHandler', {
@@ -32,18 +33,28 @@ export class cdkStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_20_X,
       handler: 'index.handler',
       code: lambda.Code.fromInline(`
-      const { DynamoDBClient, PutItemCommand } = require('@aws-sdk/client-dynamodb');
+      const { DynamoDBClient, PutItemCommand, GetItemCommand } = require('@aws-sdk/client-dynamodb');
       const crypto = require('crypto');
       const client = new DynamoDBClient({});
 
       exports.handler = async (event) => {
-          try {
-
+              try {
+                const getPaymentStatus = new GetItemCommand({
+                  TableName: "${tableStatus}",
+                  Key: {
+                      id: { S: 'paymentStatus' }
+                  }
+              });
+              const statusData = await client.send(getPaymentStatus);
+              const paymentStatus = statusData.Item ? statusData.Item.status.BOOL : false;
+              if (!paymentStatus) {
+                  throw new Error("Force failure payment status");
+              } 
               for (const record of event.Records) {
                   const body = JSON.parse(record.body);
                   if (!body.card || !body.name) throw new Error("Invalid body format");
                   const command = new PutItemCommand({
-                      TableName: "Orders-dev",
+                      TableName: "${tableOrders}",
                       Item: {
                           id: { S: crypto.randomUUID() },
                           card: { S: body.card },
@@ -80,7 +91,8 @@ export class cdkStack extends cdk.Stack {
           "dynamodb:Scan"
         ],
         resources: [
-          `arn:aws:dynamodb:${this.region}:${this.account}:table/${tableName}`
+          `arn:aws:dynamodb:${this.region}:${this.account}:table/${tableOrders}`,
+          `arn:aws:dynamodb:${this.region}:${this.account}:table/${tableStatus}`
         ],
       })
     );

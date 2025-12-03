@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 
 app.get(path, async function(req, res) {
 
-  let putItemParams = {
+  const putItemParams = {
     TableName: tableName,
     Key: {
       id: 'paymentStatus'
@@ -43,13 +43,13 @@ app.get(path, async function(req, res) {
 
 app.post(path, async function(req, res) {
 
-  let putItemParams = {
+  const putItemParams = {
     TableName: tableName,
     Item: {...req.body, id: 'paymentStatus' },
   }
   
   try {
-    let data = await ddbDocClient.send(new PutCommand(putItemParams));
+    const data = await ddbDocClient.send(new PutCommand(putItemParams));
     res.json( data );
   } catch (err) {
     res.statusCode = 500;

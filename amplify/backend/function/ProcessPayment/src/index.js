@@ -3,12 +3,25 @@
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 
-const { DynamoDBClient, PutItemCommand } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBClient, PutItemCommand, GetItemCommand } = require('@aws-sdk/client-dynamodb');
 const crypto = require('crypto');
 const client = new DynamoDBClient({});
 
 exports.handler = async (event) => {
     try {
+
+        const getPaymentStatus = new GetItemCommand({
+            TableName: "Status-dev",
+            Key: {
+                id: { S: 'paymentStatus' }
+            }
+        });
+        const statusData = await client.send(getPaymentStatus);
+        console.log("Status Data:", statusData);
+        const paymentStatus = statusData.Item ? statusData.Item.status.BOOL : false;
+        if (!paymentStatus) {
+            throw new Error("Force failure payment status");
+        }
 
         for (const record of event.Records) {
             const body = JSON.parse(record.body);
