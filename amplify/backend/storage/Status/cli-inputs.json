@@ -1,0 +1,10 @@
+{
+  "resourceName": "Status",
+  "tableName": "Status",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

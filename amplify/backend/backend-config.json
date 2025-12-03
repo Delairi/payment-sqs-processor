@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "GetOrders"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "ChangeStatus"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -22,6 +30,25 @@
     }
   },
   "function": {
+    "ChangeStatus": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "PaymentDB"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "GetOrders": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -34,6 +61,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_ChangeStatus_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ChangeStatus"
+        }
+      ]
+    },
+    "AMPLIFY_function_ChangeStatus_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ChangeStatus"
+        }
+      ]
+    },
     "AMPLIFY_function_GetOrders_deploymentBucketName": {
       "usedBy": [
         {
@@ -69,6 +112,10 @@
   },
   "storage": {
     "PaymentDB": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "Status": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }

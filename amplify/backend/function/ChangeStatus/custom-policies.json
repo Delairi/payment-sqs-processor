@@ -10,7 +10,7 @@
       "dynamodb:Scan"
     ],
     "Resource": [
-      "arn:aws:dynamodb:us-east-2:327820291301:table/Orders-dev"
+      "arn:aws:dynamodb:us-east-2:327820291301:table/Status-dev"
     ]
   }
 ]

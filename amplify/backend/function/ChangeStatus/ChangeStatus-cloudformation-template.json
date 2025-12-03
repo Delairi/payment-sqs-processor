@@ -15,6 +15,14 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "storagePaymentDBName": {
+      "Type": "String",
+      "Default": "storagePaymentDBName"
+    },
+    "storagePaymentDBArn": {
+      "Type": "String",
+      "Default": "storagePaymentDBArn"
     }
   },
   "Conditions": {
@@ -47,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "GetOrders",
+            "ChangeStatus",
             {
               "Fn::Join": [
                 "",
                 [
-                  "GetOrders",
+                  "ChangeStatus",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "sqspaymentprocessorLambdaRoleb9ad2f67",
+            "sqspaymentprocessorLambdaRole1a3feee9",
             {
               "Fn::Join": [
                 "",
                 [
-                  "sqspaymentprocessorLambdaRoleb9ad2f67",
+                  "sqspaymentprocessorLambdaRole1a3feee9",
                   "-",
                   {
                     "Ref": "env"
@@ -160,6 +168,34 @@
                   }
                 ]
               }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:DescribeTable",
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem"
+              ],
+              "Resource": [
+                {
+                  "Ref": "storagePaymentDBArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storagePaymentDBArn"
+                      },
+                      "index/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -183,7 +219,7 @@
                 "dynamodb:Scan"
               ],
               "Resource": [
-                "arn:aws:dynamodb:us-east-2:327820291301:table/Orders-dev"
+                "arn:aws:dynamodb:us-east-2:327820291301:table/Status-dev"
               ]
             }
           ]

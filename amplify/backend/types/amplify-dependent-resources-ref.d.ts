@@ -7,6 +7,13 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "ChangeStatus": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "GetOrders": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -24,6 +31,14 @@ export type AmplifyDependentResourcesAttributes = {
   },
   "storage": {
     "PaymentDB": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
+      "StreamArn": "string"
+    },
+    "Status": {
       "Arn": "string",
       "Name": "string",
       "PartitionKeyName": "string",
