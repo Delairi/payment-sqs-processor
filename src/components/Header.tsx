@@ -5,18 +5,20 @@ import { NewPaymentStatus } from '../services/Payment.service';
 
 const Header = () => {
 
-    const { statusPayment, setStatusPayment } = useStore();
+    const { statusPayment, setStatusPayment, setIsLoading } = useStore();
     const paymentControl = async (status: boolean) => {
+        setIsLoading(true);
         const response = await NewPaymentStatus(status);
-        if (!response || !statusPayment) return;
+        if (!response) return;
         setStatusPayment({
-            ...statusPayment,
+            ...statusPayment!,
             status
         }); 
+        setIsLoading(false);
     }
 
     return (
-        <div className="w-full px-4 h-[42px] flex items-center justify-between shadow-lg gap-5 z-50 bg-white">
+        <div className="w-full px-4 h-[42px] flex items-center justify-between shadow-lg gap-5 z-50 bg-[#32363b] text-white font-montserrat">
             <div className='flex flex-row gap-5 items-center'>
                 <span>On/Off</span>
                 <Switch onChange={paymentControl} checked={statusPayment?.status} />

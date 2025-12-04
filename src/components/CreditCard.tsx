@@ -88,6 +88,7 @@ const CreditCard = ({ createOrder }: CreditCardProps) => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value.toUpperCase())}
                                 className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none"
+                                maxLength={20}
                                 placeholder="FULL NAME"
                             />
                         </div>
@@ -114,7 +115,7 @@ const CreditCard = ({ createOrder }: CreditCardProps) => {
                             value={cvc}
                             onFocus={() => setIsFlipped(true)}
                             onBlur={() => setIsFlipped(false)}
-                            onChange={(e) => setCvc(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                            onChange={(e) => setCvc(e.target.value.replace(/\D/g, "").slice(0, 3))}
                             className="mt-1 w-40 px-4 py-2 border rounded-lg focus:outline-none"
                             placeholder="CVC"
                         />
@@ -123,7 +124,7 @@ const CreditCard = ({ createOrder }: CreditCardProps) => {
                     <div className="w-full mt-6 flex justify-center items-center">
                         <button
                             type="submit"
-                            className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition w-full"
+                            className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition w-full cursor-pointer"
                         >
                             Pay Now
                         </button>

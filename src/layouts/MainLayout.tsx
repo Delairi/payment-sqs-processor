@@ -11,7 +11,7 @@ const MainLayout = () => {
                 isLoading && <Loader />
             }
             <Header />
-            <div className="h-[calc(100vh-42px)]">
+            <div className="h-[calc(100vh-42px)] bg-[#f7f7f7]">
                 <Outlet />
             </div>
         </div>
