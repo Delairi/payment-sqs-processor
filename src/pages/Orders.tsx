@@ -3,13 +3,17 @@ import useStore from "../store"
 import { useOrders } from "../hooks/Orders.hook"
 
 const Orders = () => {
-  const { setOrders } = useStore()
-  const { data: orders, isLoading } = useOrders();
+  const { setOrders, setIsLoading } = useStore()
+  const { data: orders, isLoading, isFetching } = useOrders();
 
   useEffect(() => {
     if (!orders || isLoading) return;
-    setOrders(orders)    
+    setOrders(orders)
   }, [])
+
+  useEffect(() => {
+    setIsLoading(isFetching)
+  }, [isFetching])
   return (
     <div className="flex flex-col gap-5">
       {

@@ -6,25 +6,31 @@ import useStore from "../store";
 
 const Home = () => {
 
-    const { setStatusPayment } = useStore()
+    const { setIsLoading, setStatusPayment, statusPayment } = useStore()
 
     useEffect(() => {
+        if(statusPayment) return;
+        setIsLoading(true)
         GetStatusPayment().then(response => {
             if (!response) return;
             setStatusPayment(response)
+            setIsLoading(false)
+        }).catch(() => {
+            setIsLoading(false)
         })
     }, [])
 
     const createOrder = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(e)
+        setIsLoading(true)
         const form = new FormData(e.currentTarget);
         const name = form.get("name") as string;
         const card = form.get("card") as string;
         if (!name || !card) return
         const createOrder = await CreateOrderService(name, card)
-        if(!createOrder) return;
+        if (!createOrder) return;
         await ProccesingPaymentService(createOrder.id)
+        setIsLoading(false)
     }
 
     return (

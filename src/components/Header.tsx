@@ -12,7 +12,7 @@ const Header = () => {
         setStatusPayment({
             ...statusPayment,
             status
-        });
+        }); 
     }
 
     return (
