@@ -33,7 +33,7 @@ export class cdkStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_20_X,
       handler: 'index.handler',
       code: lambda.Code.fromInline(`
-      const { DynamoDBClient, PutItemCommand, GetItemCommand } = require('@aws-sdk/client-dynamodb');
+      const { DynamoDBClient, UpdateItemCommand, GetItemCommand } = require('@aws-sdk/client-dynamodb');
       const crypto = require('crypto');
       const client = new DynamoDBClient({});
 
@@ -52,15 +52,20 @@ export class cdkStack extends cdk.Stack {
               } 
               for (const record of event.Records) {
                   const body = JSON.parse(record.body);
-                  if (!body.card || !body.name) throw new Error("Invalid body format");
-                  const command = new PutItemCommand({
+                  if (!body.id) throw new Error("Invalid body format");
+                  const command = new UpdateItemCommand({
                       TableName: "${tableOrders}",
-                      Item: {
-                          id: { S: crypto.randomUUID() },
-                          card: { S: body.card },
-                          name: { S: body.name },
-                          orderId: { S: crypto.randomUUID() },
-                      }
+                      Key: {
+                        id: { S: body.id }
+                      },
+                      UpdateExpression: "SET #st = :newStatus",
+                      ExpressionAttributeNames: {
+                        "#st": "status"
+                      },
+                      ExpressionAttributeValues: {
+                        ":newStatus": { S: "PAYED" }
+                      },
+                      ReturnValues: "ALL_NEW"
                   });
                   const response = await client.send(command);
                   return {

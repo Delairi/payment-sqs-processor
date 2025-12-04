@@ -19,7 +19,7 @@
         },
         "GetOrders": {
           "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",
-          "s3Key": "amplify-builds/GetOrders-4d696c6b336b45593735-build.zip"
+          "s3Key": "amplify-builds/GetOrders-4a78354c525368594278-build.zip"
         },
         "ChangeStatus": {
           "deploymentBucketName": "amplify-sqspaymentprocessor-dev-e0e17-deployment",

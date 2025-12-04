@@ -20,6 +20,7 @@ const Orders = () => {
             <p>Client: {order.name}</p>
             <p>Card: {order.card}</p>
             <p>Order Id: {order.orderId}</p>
+            <p>Status: {order.status}</p>
           </div>
         })
       }
